@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
@@ -9,44 +9,26 @@ namespace Полиморфизмы_методов_класса
 {
     internal class televizor
     {
-        public string Firma {  get; set; }
-        private int diagonal;
-        public int Diagonal
+        public string Фирма {  get; set; }
+        public double Диагональ { get; set; }
+        public double МощностьЗвука { get; set; }
+        public string СтранаПроизводитель { get; set; }
+
+
+        public virtual double РассчитатьQ()
         {
-            get => diagonal;
-            set
-            {
-                if (value >= 0) diagonal = value;
-            }
-        }
-        private int zvukpower;
-        public int Zvukpower
-        {
-            get => zvukpower;
-            set { if (value >= 0) zvukpower = value; }
+            return Диагональ + (0.05 * МощностьЗвука);
         }
 
-        public televizor(string firma, int diagonal, int zvukpower)
+        public virtual double РассчитатьQp()
         {
-            Firma = firma;
-            Diagonal = diagonal;
-            Zvukpower = zvukpower;
-        }
-
-        public televizor()
-        {
-
-        }
-
-
-        public virtual double GetQuality()
-        {
-            return (double)(Diagonal + (0, 05 * Zvukpower));
+            return РассчитатьQ(); // По умолчанию Qp равен Q
         }
 
         public override string? ToString()
         {
-            return $"Фирма:{Firma}, Диагональ:{Diagonal}, Звуковая мощность: {Zvukpower}";
+            return $"Фирма:{Фирма}, Диагональ:{Диагональ}, Мощность: {МощностьЗвука}, Страна: {СтранаПроизводитель}, Q: {РассчитатьQ()}, Qp: {РассчитатьQp()}";
+            
         }
     }
 }
